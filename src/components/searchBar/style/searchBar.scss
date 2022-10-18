@@ -1,0 +1,32 @@
+@use "../../../styles/main/_colors.scss" as *;
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  input {
+    height: 60%;
+    width: 60%;
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+    &:focus {
+      outline: none;
+    }
+  }
+
+  img {
+    height: 60%;
+    width: 66px;
+    padding: 5px 0;
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+    background-color: $e-palet-whitegray-4;
+    transition: background-color 0.3s;
+    cursor: pointer;
+    &:hover {
+      background-color: $e-palet-whitegray-3;
+      transition: background-color 0.3s;
+    }
+  }
+}

@@ -1,0 +1,100 @@
+@use "../../../styles/main/_colors.scss" as *;
+
+.overlay {
+  background-color: #333333;
+  //   filter: blur(2px);
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+
+  label {
+    text-transform: capitalize;
+  }
+
+  .modal-container {
+    border-radius: 10px;
+    position: fixed;
+    bottom: 43%;
+    right: 40%;
+    height: auto;
+    width: 40%;
+    transform: translate(50%, 50%);
+    background-color: $e-palet-whitegray-4;
+    z-index: 1;
+
+    .modal-delete {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin-top: 150px;
+      margin-bottom: 150px;
+      h2 {
+        font-weight: 400;
+        margin-bottom: 10px;
+      }
+      h3 {
+        margin-bottom: 80px;
+        font-weight: 400;
+      }
+    }
+    button {
+      height: 3rem;
+      width: 14rem;
+      margin: 15px;
+      border-radius: 10px;
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: $text-color-1;
+      background: linear-gradient(to bottom, $ete-dark-green, $ete-green-op);
+      transition: background-color 0.4s;
+      &:hover {
+        cursor: pointer;
+        background: linear-gradient(to bottom, $success-turq, $ete-dark-green);
+        transition: background 0.4s;
+      }
+    }
+
+    .modal-form {
+      form {
+        padding: 50px 20px 20px 20px;
+        display: flex;
+        flex-direction: column;
+        .form-input-field {
+          display: grid;
+          align-items: center;
+          grid-template-columns: 1fr 2fr;
+          padding: 10px;
+          height: 5vh;
+          select {
+            // margin-bottom: 3px;
+            padding: 10px 0;
+          }
+          input {
+            padding: 7px 0;
+          }
+        }
+        .form-buttons {
+          margin-top: 30px;
+          display: flex;
+          flex-direction: row;
+          justify-content: space-evenly;
+        }
+      }
+      h2 {
+        padding-left: 20px;
+        padding-top: 10px;
+      }
+      img {
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 10vh;
+        width: 10vh;
+        margin: 15px;
+        border-radius: 10px;
+      }
+    }
+  }
+}

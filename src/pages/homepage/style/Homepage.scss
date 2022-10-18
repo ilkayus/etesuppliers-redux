@@ -1,0 +1,36 @@
+@use "../../../styles/main/_colors.scss" as *;
+
+.homepage {
+  background-color: $primary;
+  padding: 5px;
+  width: 125vw;
+  height: 125vh;
+  zoom: 0.8;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 350px 1fr 1fr 1fr 1fr;
+  grid-template-rows: 150px 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+
+  header {
+    grid-column: 1 / 6;
+    // border: 2px solid $white;
+    border-radius: 15px;
+    box-shadow: 0px 0px 10px $e-palet-whitegray-1-op;
+  }
+
+  nav {
+    grid-column: 1/2;
+    grid-row: 2/11;
+    border-radius: 15px;
+    //   background-color: $ete-green-op;
+    box-shadow: 0px 0px 10px $ete-green-op;
+  }
+
+  main {
+    grid-column: 2/6;
+    grid-row: 2/11;
+    border-radius: 15px;
+    // border: 3px solid red;
+    box-shadow: 0px 0px 10px $e-palet-whitegray-1-op;
+  }
+}

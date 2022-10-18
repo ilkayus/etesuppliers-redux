@@ -1,0 +1,28 @@
+.homepage {
+  background-color: #333333;
+  padding: 5px;
+  width: 125vw;
+  height: 125vh;
+  zoom: 0.8;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 350px 1fr 1fr 1fr 1fr;
+  grid-template-rows: 150px 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+.homepage header {
+  grid-column: 1/6;
+  border-radius: 15px;
+  box-shadow: 0px 0px 10px rgba(174, 174, 174, 0.8666666667);
+}
+.homepage nav {
+  grid-column: 1/2;
+  grid-row: 2/11;
+  border-radius: 15px;
+  box-shadow: 0px 0px 10px rgba(52, 119, 104, 0.8666666667);
+}
+.homepage main {
+  grid-column: 2/6;
+  grid-row: 2/11;
+  border-radius: 15px;
+  box-shadow: 0px 0px 10px rgba(174, 174, 174, 0.8666666667);
+}/*# sourceMappingURL=Homepage.css.map */

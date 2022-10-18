@@ -1,0 +1,90 @@
+.overlay {
+  background-color: #333333;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+}
+.overlay label {
+  text-transform: capitalize;
+}
+.overlay .modal-container {
+  border-radius: 10px;
+  position: fixed;
+  bottom: 43%;
+  right: 40%;
+  height: auto;
+  width: 40%;
+  transform: translate(50%, 50%);
+  background-color: #222222;
+  z-index: 1;
+}
+.overlay .modal-container .modal-delete {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 150px;
+  margin-bottom: 150px;
+}
+.overlay .modal-container .modal-delete h2 {
+  font-weight: 400;
+  margin-bottom: 10px;
+}
+.overlay .modal-container .modal-delete h3 {
+  margin-bottom: 80px;
+  font-weight: 400;
+}
+.overlay .modal-container button {
+  height: 3rem;
+  width: 14rem;
+  margin: 15px;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #efefef;
+  background: linear-gradient(to bottom, rgb(24, 80, 68), rgba(52, 119, 104, 0.8666666667));
+  transition: background-color 0.4s;
+}
+.overlay .modal-container button:hover {
+  cursor: pointer;
+  background: linear-gradient(to bottom, rgba(204, 251, 241, 0.5), rgb(24, 80, 68));
+  transition: background 0.4s;
+}
+.overlay .modal-container .modal-form form {
+  padding: 50px 20px 20px 20px;
+  display: flex;
+  flex-direction: column;
+}
+.overlay .modal-container .modal-form form .form-input-field {
+  display: grid;
+  align-items: center;
+  grid-template-columns: 1fr 2fr;
+  padding: 10px;
+  height: 5vh;
+}
+.overlay .modal-container .modal-form form .form-input-field select {
+  padding: 10px 0;
+}
+.overlay .modal-container .modal-form form .form-input-field input {
+  padding: 7px 0;
+}
+.overlay .modal-container .modal-form form .form-buttons {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+.overlay .modal-container .modal-form h2 {
+  padding-left: 20px;
+  padding-top: 10px;
+}
+.overlay .modal-container .modal-form img {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 10vh;
+  width: 10vh;
+  margin: 15px;
+  border-radius: 10px;
+}/*# sourceMappingURL=modal.css.map */
