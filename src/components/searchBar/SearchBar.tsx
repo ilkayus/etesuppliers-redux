@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import "./style/SearchBar.css";
-import useAuth from "hooks/useAuth";
+import { useAuth } from "hooks/useAuth";
 import useSearch from "hooks/useSearch";
 import API from "api";
 import { icons } from "images";
 
 const SearchBar = () => {
   const { setSearch } = useSearch();
-  const { auth } = useAuth();
+  const auth = useAuth();
   const [searchBarData, setSearchBarData] = useState<any>();
   const [searchBarlist, setSearchBarlist] = useState<any>();
   const [selected, setSelected] = useState<any>();

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./style/modal.css";
 import API from "api";
-import useAuth from "hooks/useAuth";
+import { useAuth } from "hooks/useAuth";
 import * as formHelper from "./modal.helper";
 
 export interface Props {
@@ -9,7 +9,7 @@ export interface Props {
   state: any;
 }
 const Modal = ({ state, onClose }: Props) => {
-  const { auth } = useAuth();
+  const auth = useAuth();
   const [form, setForm] = useState<any>({});
   const [formContent, setFormContent] = useState<any[]>([]);
   const [companies, setCompanies] = useState<any[]>([]);
@@ -113,19 +113,19 @@ const Modal = ({ state, onClose }: Props) => {
     e.preventDefault();
     if (state.dataType === "product" && state.actionType === "update") {
       const res = API.product.updateProduct(auth, form);
-    //  console.log("pro up");
+      //  console.log("pro up");
     }
     if (state.dataType === "company" && state.actionType === "update") {
       const res = API.company.updateCompany(auth, form);
-   //   console.log("comp up");
+      //   console.log("comp up");
     }
     if (state.dataType === "product" && state.actionType === "add") {
       const res = API.product.createProduct(auth, form);
-    //  console.log("pro add:", res);
+      //  console.log("pro add:", res);
     }
     if (state.dataType === "company" && state.actionType === "add") {
       const res = API.company.createCompany(auth, form);
-     // console.log("comp add:", res);
+      // console.log("comp add:", res);
     }
     onClose();
   };

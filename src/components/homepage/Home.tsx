@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import API from "api";
-import useAuth from "hooks/useAuth";
+import { useAuth } from "hooks/useAuth";
 import useSearch from "hooks/useSearch";
 import Components from "components";
-import { icons } from "images";
 
 const Home = () => {
   const { search } = useSearch();
-  const { auth } = useAuth();
+  const auth = useAuth();
   const [logs, setLogs] = useState<any | undefined>(undefined);
   const [requesting, setRequesting] = useState(true);
   useEffect(() => {

@@ -1,44 +1,44 @@
-import { useReducer } from "react";
-import { authReducer, initialState } from "./authReducer";
+import * as authForm from "./authReducer";
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "features/authorization/authSlice";
 import { useNavigate, useLocation } from "react-router-dom";
 import API from "api";
-import useAuth from "hooks/useAuth";
 import "./style/Login.css";
 import Components from "components";
 import { icons } from "images";
 
 const Login = () => {
   //------------------------------
-  const [state, dispatch] = useReducer(authReducer, initialState);
-  const { setAuth } = useAuth();
+  const state = useSelector(authForm.selectForm);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
   //------------------------------
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    if (!state.emailValid || !state.passwordValid) return;
-    dispatch({ type: "setRequesting", payload: true });
+    if (!state.form.emailValid || !state.form.passwordValid) return;
+    dispatch(authForm.setRequesting(true));
     try {
-      const res = await API.auth.login(state.email, state.password);
-      setAuth(res);
+      const res = await API.auth.login(state.form.email, state.form.password);
       localStorage.setItem("user", JSON.stringify(res));
-      dispatch({ type: "setRequesting", payload: false });
+      dispatch(login(res));
+      dispatch(authForm.setRequesting(false));
       navigate(from, { replace: true });
     } catch (error: any) {
-      dispatch({ type: "setFailure", payload: error.response.statusText });
+      dispatch(authForm.setFailure());
       console.log(error);
     }
   };
 
   return (
     <section className="si--page">
-      {state.isRequesting ? <Components.Loading /> : null}
+      {state.form.isRequesting ? <Components.Loading /> : null}
       <div className="si--container si--container-login">
         <Components.AnimatedLogo page="login" />
         <h1>Login</h1>
-        {state.failure ? (
-          <h3 className="login-failed">{state.failureMessage}</h3>
+        {state.form.failure ? (
+          <h3 className="login-failed">{state.form.failureMessage}</h3>
         ) : null}
         <form method="post" onSubmit={handleSubmit}>
           <label htmlFor="username" className="username">
@@ -50,19 +50,16 @@ const Login = () => {
               name="email"
               placeholder="Email"
               className={
-                state.email.length > 0
-                  ? state.emailValid
+                state.form.email.length > 0
+                  ? state.form.emailValid
                     ? "si--username-input-valid"
                     : "si--username-input-invalid"
                   : ""
               }
               required
-              value={state.email}
+              value={state.form.email}
               onChange={(e) => {
-                dispatch({
-                  type: "email",
-                  payload: e.target.value,
-                });
+                dispatch(authForm.setEmail(e.target.value));
               }}
             />
           </label>
@@ -75,19 +72,16 @@ const Login = () => {
               name="password"
               placeholder="Password"
               className={
-                state.password.length > 0
-                  ? state.passwordValid
+                state.form.password.length > 0
+                  ? state.form.passwordValid
                     ? "si--username-input-valid"
                     : "si--username-input-invalid"
                   : ""
               }
               required
-              value={state.password}
+              value={state.form.password}
               onChange={(e) => {
-                dispatch({
-                  type: "password",
-                  payload: e.target.value,
-                });
+                dispatch(authForm.setPassword(e.target.value));
               }}
             />
           </label>

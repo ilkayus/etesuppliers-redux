@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { tableHeaders, tableKeys, ago } from "./table.helper";
-import useAuth from "hooks/useAuth";
+import { useAuth } from "hooks/useAuth";
 import TableSortArrows from "./TableSortArrows";
 import "./style/Table.css";
 import { icons } from "images";
@@ -13,7 +13,7 @@ export interface Props {
 }
 
 const Table = ({ selected, setSelected, fetchFn, type }: Props) => {
-  const { auth } = useAuth();
+  const auth = useAuth();
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage, setPostsPerPage] = useState(5);
   const [pageData, setPageData] = useState<any[]>([]);

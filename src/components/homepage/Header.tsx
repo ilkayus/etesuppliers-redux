@@ -1,15 +1,14 @@
-import React from "react";
 import { logo, icons } from "images";
 import "./style/HomepageComponents.css";
-import useAuth from "hooks/useAuth";
 import Components from "components";
+import { useDispatch } from "react-redux";
+import { logoff } from "features/authorization/authSlice";
+import { useAuth } from "hooks/useAuth";
 
 const Header = () => {
-  const { auth, setAuth } = useAuth();
-  const logOutUser = () => {
-    localStorage.removeItem("user");
-    setAuth(undefined);
-  };
+  const auth = useAuth();
+  const dispatch = useDispatch();
+
   return (
     <header className="header">
       <img src={logo.etecubeLogo} alt="etecube logo" className="etecube-logo" />
@@ -24,7 +23,7 @@ const Header = () => {
           <p>{auth?.email}</p>
           <p>{auth?.role}</p>
         </div>
-        <div className="logout" onClick={logOutUser}>
+        <div className="logout" onClick={() => dispatch(logoff())}>
           <img src={icons.powerOff} alt="logout button" />
         </div>
       </div>

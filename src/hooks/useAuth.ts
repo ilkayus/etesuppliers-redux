@@ -1,6 +1,4 @@
-import { useContext } from "react";
-import AuthContext from "context/AuthProvider";
+import { useSelector } from "react-redux";
+import { selectAuth } from "features/authorization/authSlice";
 
-const useAuth = () => useContext(AuthContext);
-
-export default useAuth;
+export const useAuth = () => useSelector(selectAuth);

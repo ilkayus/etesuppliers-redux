@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import useSearch from "hooks/useSearch";
-import useAuth from "hooks/useAuth";
+import { useAuth } from "hooks/useAuth";
 import API from "api";
 import Components from "components";
 
 const SearchResult = () => {
-  const { auth } = useAuth();
+  const auth = useAuth();
   const { search, setSearch } = useSearch();
   const [result, setResult] = useState<any>();
   const [requesting, setRequesting] = useState(true);

@@ -3,7 +3,8 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./styles/index.css";
 import App from "./App";
-import { AuthProvider } from "context/AuthProvider";
+import store from "./store/store";
+import { Provider } from "react-redux";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -11,11 +12,11 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <AuthProvider>
+      <Provider store={store}>
         <Routes>
           <Route path="/*" element={<App />} />
         </Routes>
-      </AuthProvider>
+      </Provider>
     </BrowserRouter>
   </React.StrictMode>
 );
