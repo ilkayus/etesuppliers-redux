@@ -1,7 +1,8 @@
 import axios from "axios";
 import { ICompanyData } from "types/company.interface";
-import { IUserData } from "types/authorization.interface";
+import { ISearchData } from "types/search.interface";
 import { urlHelper, checkUserAndSetHeader } from "api/api.helpers";
+import { IProductData } from "types/product.interface";
 
 const getCompanyList = async (): Promise<any[]> => {
   const config = checkUserAndSetHeader();
@@ -10,7 +11,7 @@ const getCompanyList = async (): Promise<any[]> => {
   return response.data.data;
 };
 
-const getSearchBarData = async (): Promise<any[]> => {
+const getSearchBarData = async (): Promise<ISearchData> => {
   const config = checkUserAndSetHeader();
   const url = urlHelper.BASE_URL + urlHelper.GET_SEARCHBAR_LIST_URL;
   const response = await axios.get(url, config);
@@ -24,7 +25,9 @@ const getHomePageLogs = async (): Promise<any[]> => {
   return response.data;
 };
 
-const getSearchResult = async (id: string): Promise<any[]> => {
+const getSearchResult = async (
+  id: string
+): Promise<ICompanyData | IProductData> => {
   const config = checkUserAndSetHeader();
   const url = urlHelper.BASE_URL + urlHelper.GET_SEARCH_ONE_URL + `/${id}`;
   const response = await axios.get(url, config);

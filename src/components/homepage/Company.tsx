@@ -2,7 +2,7 @@ import { ICompanyData } from "types/company.interface";
 import { ago } from "../table/table.helper";
 
 export interface Props {
-  selected: ICompanyData;
+  selected: any;
 }
 
 const Company = ({ selected }: Props) => {

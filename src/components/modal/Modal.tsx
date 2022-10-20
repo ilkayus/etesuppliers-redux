@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import "./style/modal.css";
 import API from "api";
-import { useAuth } from "hooks/useAuth";
 import * as formHelper from "./modal.helper";
 
 export interface Props {
@@ -9,7 +8,6 @@ export interface Props {
   state: any;
 }
 const Modal = ({ state, onClose }: Props) => {
-  const auth = useAuth();
   const [form, setForm] = useState<any>({});
   const [formContent, setFormContent] = useState<any[]>([]);
   const [companies, setCompanies] = useState<any[]>([]);
@@ -22,7 +20,7 @@ const Modal = ({ state, onClose }: Props) => {
       };
       companyList().then((data) => setCompanies(data));
     }
-  }, [auth, state.dataType]);
+  }, [state.dataType]);
 
   useEffect(() => {
     if (state.actionType === "update")
@@ -95,10 +93,10 @@ const Modal = ({ state, onClose }: Props) => {
   const deleteItem = () => {
     let res: any;
     if (state.dataType === "product") {
-      res = API.product.deleteProduct(auth, state.data._id);
+      res = API.product.deleteProduct(state.data._id);
     }
     if (state.dataType === "company") {
-      res = API.company.deleteCompany(auth, state.data._id);
+      res = API.company.deleteCompany(state.data._id);
     }
     onClose();
   };
@@ -112,19 +110,19 @@ const Modal = ({ state, onClose }: Props) => {
   const handleFormSubmit = (e: any) => {
     e.preventDefault();
     if (state.dataType === "product" && state.actionType === "update") {
-      const res = API.product.updateProduct(auth, form);
+      const res = API.product.updateProduct(form);
       //  console.log("pro up");
     }
     if (state.dataType === "company" && state.actionType === "update") {
-      const res = API.company.updateCompany(auth, form);
+      const res = API.company.updateCompany(form);
       //   console.log("comp up");
     }
     if (state.dataType === "product" && state.actionType === "add") {
-      const res = API.product.createProduct(auth, form);
+      const res = API.product.createProduct(form);
       //  console.log("pro add:", res);
     }
     if (state.dataType === "company" && state.actionType === "add") {
-      const res = API.company.createCompany(auth, form);
+      const res = API.company.createCompany(form);
       // console.log("comp add:", res);
     }
     onClose();

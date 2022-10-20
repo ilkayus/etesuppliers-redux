@@ -16,6 +16,7 @@ import TableSortArrows from "./table/TableSortArrows";
 
 import SearchBar from "./searchBar/SearchBar";
 import SearchResult from "./searchBar/SearchResult";
+import SearchBarList from "./searchBar/SearchBarList";
 
 import Modal from "./modal/Modal";
 
@@ -38,6 +39,7 @@ const Components = {
   Modal,
   SearchBar,
   SearchResult,
+  SearchBarList,
   Loading,
 };
 

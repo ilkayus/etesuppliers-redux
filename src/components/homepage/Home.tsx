@@ -1,16 +1,13 @@
 import { useEffect, useState } from "react";
 import API from "api";
-import useSearch from "hooks/useSearch";
 import Components from "components";
 
 const Home = () => {
-  const { search } = useSearch();
   const [logs, setLogs] = useState<any | undefined>(undefined);
   const [requesting, setRequesting] = useState(true);
   useEffect(() => {
     const getLogs = async () => {
       const res = await API.search.getHomePageLogs();
-      // console.log(res);
       return res;
     };
     getLogs()
@@ -21,31 +18,7 @@ const Home = () => {
     <main className="home">
       <div className="home-section">
         <div className="table-container">
-          {search ? (
-            <Components.SearchResult />
-          ) : (
-            <>
-              <h1>Home</h1>
-              <p>
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. At
-                vero, accusantium eligendi reprehenderit corrupti suscipit hic,
-                facilis veritatis nulla eaque maiores cumque. Consectetur sunt
-                dicta officiis dolorum ex deserunt. Quos.
-              </p>
-              <p>
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                Molestias ullam alias hic sint perspiciatis recusandae!
-                Incidunt, ex. Corporis officiis et mollitia culpa illo voluptate
-                provident, molestias dolor soluta voluptatum consequatur?
-              </p>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias,
-                eaque quos placeat similique, aperiam dolorem asperiores
-                mollitia labore numquam debitis accusantium atque distinctio
-                neque repudiandae molestias libero commodi voluptatem dolorum!
-              </p>
-            </>
-          )}
+          <Components.SearchResult />
         </div>
       </div>
       <div className="home-section companies">

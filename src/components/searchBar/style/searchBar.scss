@@ -1,5 +1,8 @@
 @use "../../../styles/main/_colors.scss" as *;
 
+.search-result-container {
+  padding-right: 20px;
+}
 .search-bar {
   display: flex;
   align-items: center;

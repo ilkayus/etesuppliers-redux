@@ -1,71 +1,33 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
+import {
+  selectSearch,
+  fetchSearchData,
+  setSelected,
+  fetchSelected,
+} from "features/search/searchSlice";
+import { useAppSelector, useAppDispatch } from "hooks/typedReduxHooks";
 import "./style/SearchBar.css";
-import { useAuth } from "hooks/useAuth";
-import useSearch from "hooks/useSearch";
-import API from "api";
 import { icons } from "images";
+import Components from "components";
 
 const SearchBar = () => {
-  const { setSearch } = useSearch();
-  const auth = useAuth();
-  const [searchBarData, setSearchBarData] = useState<any>();
-  const [searchBarlist, setSearchBarlist] = useState<any>();
-  const [selected, setSelected] = useState<any>();
-
+  //-------------------------------
+  const state = useAppSelector(selectSearch);
+  const dispatch = useAppDispatch();
   useEffect(() => {
-    const getSearchBarList = async () => {
-      const res = await API.search.getSearchBarData();
-      console.log(res);
-      return res;
-    };
-    // if (searchBarData?.length === 0 || searchBarData === undefined)
-    getSearchBarList().then((data) => setSearchBarData(data));
-  }, [auth]);
-
-  useEffect(() => {
-    let comps: any[] = [];
-    let prods: any[] = [];
-    searchBarData?.companyList.forEach((el: any, idx: number) =>
-      comps.push(
-        <option
-          key={idx + 1000}
-          data-type="company"
-          data-idvalue={el._id}
-          value={el.name}
-        ></option>
-      )
-    );
-    searchBarData?.productList.forEach((el: any, idx: number) =>
-      prods.push(
-        <option
-          key={idx + 2000}
-          data-type="product"
-          data-idvalue={el._id}
-          value={el.name}
-        >
-          {el.company.name}
-        </option>
-      )
-    );
-    setSearchBarlist([...comps, ...prods]);
-  }, [searchBarData]);
-
+    dispatch(fetchSearchData());
+  }, [dispatch]);
+  //-------------------------------
   const getSearchResult = () => {
-    console.log("search:", selected);
-    setSearch(selected);
+    if (state.selected._id !== "") dispatch(fetchSelected(state.selected));
   };
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let data = searchBarData?.companyList.find(
-      (el: any) => el.name.toLowerCase() === e.target.value.toLowerCase()
-    );
-    if (!data)
-      data = searchBarData?.productList.find(
-        (el: any) => el.name.toLowerCase() === e.target.value.toLowerCase()
-      );
-    setSelected(data);
-    console.log(data);
+    const list = e.target.list as any;
+    const opts = list.options.namedItem(e.target.value);
+    if (opts) dispatch(setSelected({ ...opts.dataset }));
   };
+
   return (
     <div className="search-bar">
       <input
@@ -77,7 +39,9 @@ const SearchBar = () => {
         }}
         onChange={handleSearchChange}
       />
-      <datalist id="search-list">{searchBarlist}</datalist>
+      <datalist id="search-list">
+        {state.received ? <Components.SearchBarList /> : null}
+      </datalist>
       <img src={icons.search} alt="search icon" onClick={getSearchResult} />
     </div>
   );
