@@ -1,19 +1,17 @@
 import { useEffect, useState } from "react";
 import API from "api";
 import Components from "components";
+import { selectDataLogs, fetchLogs } from "features/commonData/dataSlice";
+import { useAppSelector, useAppDispatch } from "hooks/typedReduxHooks";
 
 const Home = () => {
-  const [logs, setLogs] = useState<any | undefined>(undefined);
-  const [requesting, setRequesting] = useState(true);
+  const state = useAppSelector(selectDataLogs);
+  const dispatch = useAppDispatch();
+
   useEffect(() => {
-    const getLogs = async () => {
-      const res = await API.search.getHomePageLogs();
-      return res;
-    };
-    getLogs()
-      .then(setLogs)
-      .finally(() => setRequesting(false));
+    dispatch(fetchLogs());
   }, []);
+
   return (
     <main className="home">
       <div className="home-section">
@@ -24,9 +22,9 @@ const Home = () => {
       <div className="home-section companies">
         <h2>Last Activities:</h2>
         <div className="table-container">
-          {requesting ? null : (
+          {state.loading ? null : (
             <ul>
-              {logs.systemLogs.map((el: any, idx: number) => (
+              {state.systemLogs.map((el: any, idx: number) => (
                 <li key={idx}>{el}</li>
               ))}
             </ul>
@@ -36,9 +34,9 @@ const Home = () => {
       <div className="home-section products-of-company">
         <h2>Last Added Companies:</h2>
         <div className="table-container">
-          {requesting ? null : (
+          {state.loading ? null : (
             <ul>
-              {logs.companyLogs.map((el: any, idx: number) => (
+              {state.companyLogs.map((el: any, idx: number) => (
                 <li key={idx}>{el}</li>
               ))}
             </ul>
@@ -48,9 +46,9 @@ const Home = () => {
       <div className="home-section user-activity">
         <h2>Last Added Products:</h2>
         <div className="table-container">
-          {requesting ? null : (
+          {state.loading ? null : (
             <ul>
-              {logs.productLogs.map((el: any, idx: number) => (
+              {state.productLogs.map((el: any, idx: number) => (
                 <li key={idx}>{el}</li>
               ))}
             </ul>

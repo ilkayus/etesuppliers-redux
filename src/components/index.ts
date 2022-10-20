@@ -11,8 +11,9 @@ import Product from "./homepage/Product";
 import Missing from "./homepage/Missing";
 import Unauthorized from "./homepage/Unauthorized";
 
-import Table from "./table/Table";
 import TableSortArrows from "./table/TableSortArrows";
+import CompanyTable from "./table/CompanyTable";
+import ProductTable from "./table/ProductTable";
 
 import SearchBar from "./searchBar/SearchBar";
 import SearchResult from "./searchBar/SearchResult";
@@ -34,8 +35,9 @@ const Components = {
   Product,
   Missing,
   Unauthorized,
-  Table,
   TableSortArrows,
+  CompanyTable,
+  ProductTable,
   Modal,
   SearchBar,
   SearchResult,

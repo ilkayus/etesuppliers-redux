@@ -16,7 +16,10 @@ export interface ISearchData {
   message: string;
 }
 
-//   owner: {
-//     username: string;
-//     _id: string;
-//   };
+export interface ILogsData {
+  companyLogs: string[];
+  productLogs: string[];
+  systemLogs: string[];
+  status: string;
+  message: string;
+}

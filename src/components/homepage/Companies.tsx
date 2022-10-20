@@ -1,11 +1,12 @@
 import { useState } from "react";
 import Components from "components";
-import API from "api";
 import { icons } from "images";
+import { selectedCompanyData } from "features/commonData/dataSlice";
+import { useAppSelector } from "hooks/typedReduxHooks";
 
 const Companies = () => {
   const [grid, setGrid] = useState(false);
-  const [selectedCompany, setSelectedCompany] = useState<any>({});
+  const selectedCompany = useAppSelector(selectedCompanyData);
   const [modalState, setModalState] = useState({
     open: false,
     actionType: "add",
@@ -75,12 +76,7 @@ const Companies = () => {
               </div>
             </div>
             <div className="table-container">
-              <Components.Table
-                selected={selectedCompany}
-                setSelected={setSelectedCompany}
-                fetchFn={API.company.getAllCompanies}
-                type={"company"}
-              />
+              <Components.CompanyTable />
             </div>
           </div>
           <div className="product-section product-selected">

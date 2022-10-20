@@ -1,10 +1,8 @@
 import { ICompanyData } from "types/company.interface";
 import { ago } from "../table/table.helper";
-
 export interface Props {
-  selected: any;
+  selected: ICompanyData | any;
 }
-
 const Company = ({ selected }: Props) => {
   return (
     <div className="product-selected-product">
@@ -17,7 +15,7 @@ const Company = ({ selected }: Props) => {
         <h3 className="header-owner">Owner : {selected.owner?.username}</h3>
         <h3 className="header-company">
           Website :{" "}
-          <a href={selected.website} target="_blank">
+          <a href={selected.website} target="_blank" rel="noreferrer">
             {selected.website}
           </a>
         </h3>

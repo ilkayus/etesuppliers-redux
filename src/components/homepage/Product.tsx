@@ -2,9 +2,8 @@ import { IProductData } from "types/product.interface";
 import { ago } from "../table/table.helper";
 
 export interface Props {
-  selected: any;
+  selected: IProductData | any;
 }
-
 const Product = ({ selected }: Props) => {
   return (
     <div className="product-selected-product">

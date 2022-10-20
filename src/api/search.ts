@@ -1,6 +1,6 @@
 import axios from "axios";
 import { ICompanyData } from "types/company.interface";
-import { ISearchData } from "types/search.interface";
+import { ISearchData, ILogsData } from "types/search.interface";
 import { urlHelper, checkUserAndSetHeader } from "api/api.helpers";
 import { IProductData } from "types/product.interface";
 
@@ -18,7 +18,7 @@ const getSearchBarData = async (): Promise<ISearchData> => {
   return response.data;
 };
 
-const getHomePageLogs = async (): Promise<any[]> => {
+const getHomePageLogs = async (): Promise<ILogsData> => {
   const config = checkUserAndSetHeader();
   const url = urlHelper.BASE_URL + urlHelper.GET_HOMEPAGE_LOGS_URL;
   const response = await axios.get(url, config);
