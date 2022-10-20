@@ -56,9 +56,10 @@ const authReducer = createSlice({
       state.form.isRequesting = action.payload;
       state.form.failure = false;
     },
-    setFailure: (state) => {
+    setFailure: (state, action: PayloadAction<string>) => {
       state.form.isRequesting = false;
       state.form.failure = true;
+      state.form.failureMessage = action.payload;
     },
   },
 });

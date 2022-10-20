@@ -17,7 +17,7 @@ const Modal = ({ state, onClose }: Props) => {
   useEffect(() => {
     if (state.dataType === "product") {
       const companyList = async () => {
-        const res = await API.search.getCompanyList(auth);
+        const res = await API.search.getCompanyList();
         return res;
       };
       companyList().then((data) => setCompanies(data));

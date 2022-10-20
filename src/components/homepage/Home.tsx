@@ -1,17 +1,15 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import API from "api";
-import { useAuth } from "hooks/useAuth";
 import useSearch from "hooks/useSearch";
 import Components from "components";
 
 const Home = () => {
   const { search } = useSearch();
-  const auth = useAuth();
   const [logs, setLogs] = useState<any | undefined>(undefined);
   const [requesting, setRequesting] = useState(true);
   useEffect(() => {
     const getLogs = async () => {
-      const res = await API.search.getHomePageLogs(auth);
+      const res = await API.search.getHomePageLogs();
       // console.log(res);
       return res;
     };

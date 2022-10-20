@@ -14,7 +14,7 @@ const SearchBar = () => {
 
   useEffect(() => {
     const getSearchBarList = async () => {
-      const res = await API.search.getSearchBarData(auth);
+      const res = await API.search.getSearchBarData();
       console.log(res);
       return res;
     };

@@ -17,7 +17,14 @@ const Login = () => {
   //------------------------------
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    if (!state.form.emailValid || !state.form.passwordValid) return;
+    if (!state.form.emailValid) {
+      dispatch(authForm.setFailure("Email is not correct"));
+      return;
+    }
+    if (!state.form.passwordValid) {
+      dispatch(authForm.setFailure("Password must be 8 characters or longer."));
+      return;
+    }
     dispatch(authForm.setRequesting(true));
     try {
       const res = await API.auth.login(state.form.email, state.form.password);
@@ -26,7 +33,7 @@ const Login = () => {
       dispatch(authForm.setRequesting(false));
       navigate(from, { replace: true });
     } catch (error: any) {
-      dispatch(authForm.setFailure());
+      dispatch(authForm.setFailure(error.response.data.message));
       console.log(error);
     }
   };

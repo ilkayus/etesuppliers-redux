@@ -1,33 +1,91 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { IUserData } from "types/authorization.interface";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import API from "api";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "../../store/store";
+import { ICompanyData } from "types/company.interface";
+import { IProductData } from "types/product.interface";
 
-type AuthType = {
-  auth: IUserData | undefined;
+// TYPES ----------------------------------------
+type SearchDataCompaniesType = {
+  _id: string;
+  name: string;
 };
-
-const initialState: AuthType = {
-  auth:
-    Object.keys(JSON.parse(localStorage.getItem("user") || "{}")).length === 0
-      ? undefined
-      : JSON.parse(localStorage.getItem("user") || "{}"),
+type SearchDataProductsType = {
+  _id: string;
+  name: string;
+  company: string;
 };
+type SearchDataSelectedType = {
+  _id: string;
+  type: "company" | "product";
+};
+type SearchType = {
+  search: {
+    data: {
+      companies: SearchDataCompaniesType[];
+      products: SearchDataProductsType[];
+    };
+    searchBarList: JSX.Element[];
+    selected: SearchDataSelectedType | undefined;
+    resultCompany: ICompanyData | undefined;
+    resultProduct: IProductData | undefined;
+    loading: boolean;
+    received: boolean;
+  };
+};
+// TYPES ----------------------------------------
+// initialState ----------------------------------------
+const initialState: SearchType = {
+  search: {
+    data: {
+      companies: [] as SearchDataCompaniesType[],
+      products: [] as SearchDataProductsType[],
+    },
+    searchBarList: [] as JSX.Element[],
+    selected: undefined,
+    resultCompany: undefined,
+    resultProduct: undefined,
+    loading: true,
+    received: false,
+  },
+};
+// initialState ----------------------------------------
+// async thunk --------------------------------
+const fetchSearchData = createAsyncThunk("search/fetchSearchData", async () => {
+  const response = await API.search.getSearchBarData();
+  return response as Partial<SearchType>;
+});
 
-export const authSlice = createSlice({
+// async thunk --------------------------------
+export const searchSlice = createSlice({
   name: "search",
   initialState,
   reducers: {
-    login: (state, action: PayloadAction<IUserData>) => {
-      state.auth = action.payload;
+    loading: (state) => {
+      state.search.loading = true;
+      state.search.received = false;
     },
-    logoff: (state) => {
-      state.auth = undefined;
-      localStorage.removeItem("user");
+    received: (state) => {
+      state.search.received = true;
+      state.search.loading = false;
     },
+  },
+  extraReducers(builder) {
+    builder
+      .addCase(fetchSearchData.pending, (state) => {
+        state.search.loading = true;
+        state.search.received = false;
+      })
+      .addCase(fetchSearchData.fulfilled, (state, action) => {
+        state.search.loading = false;
+        state.search.received = true;
+        action.payload.companyList.map((payload) => {});
+      });
   },
 });
 
-export const { login, logoff } = authSlice.actions;
+export const {} = searchSlice.actions;
 export const selectAuth = (state: RootState) => state.auth.auth;
-export default authSlice.reducer;
+export default searchSlice.reducer;
+
+// thunk

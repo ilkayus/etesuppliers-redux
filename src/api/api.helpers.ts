@@ -1,5 +1,7 @@
 import { IUserData } from "types/authorization.interface";
 
+import store from "store/store";
+
 // const BASE_URL = "http://localhost:9000/api/v1";
 const BASE_URL = "https://etecube-assignment-server.herokuapp.com/api/v1";
 const REGISTER_URL = "/users/register";
@@ -45,6 +47,19 @@ const checkUser = (user: IUserData | undefined): any => {
   return config;
 };
 //-----------------------------------------------
+const checkUserAndSetHeader = (): any => {
+  const state = store.getState();
+  const user = state.auth.auth;
+  const config = user
+    ? {
+        headers: {
+          Authorization: "Bearer " + user.token,
+        },
+      }
+    : {};
+  return config;
+};
+//-----------------------------------------------
 const urlBuilder = (fetchString: string, fetchInfo: string) => {
   return `${fetchString}/${fetchInfo}`;
 };
@@ -72,4 +87,4 @@ const urlHelper = {
   GET_SEARCH_ONE_URL,
 };
 
-export { urlHelper, checkUser, urlBuilder, setHeader };
+export { urlHelper, checkUser, urlBuilder, setHeader, checkUserAndSetHeader };

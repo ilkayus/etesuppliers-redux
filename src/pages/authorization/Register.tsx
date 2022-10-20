@@ -17,13 +17,26 @@ const Register = () => {
   //------------------------------
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    if (
-      !state.form.emailValid ||
-      !state.form.passwordValid ||
-      !state.form.usernameValid ||
-      !state.form.confirmPasswordValid
-    )
+    if (!state.form.usernameValid) {
+      dispatch(
+        authForm.setFailure(
+          "Username must start with a letter and  must be longer than 4 characters."
+        )
+      );
       return;
+    }
+    if (!state.form.emailValid) {
+      dispatch(authForm.setFailure("Email is not correct"));
+      return;
+    }
+    if (!state.form.passwordValid) {
+      dispatch(authForm.setFailure("Password must be 8 characters or longer."));
+      return;
+    }
+    if (!state.form.confirmPasswordValid) {
+      dispatch(authForm.setFailure("Password confirm failed."));
+      return;
+    }
     dispatch(authForm.setRequesting(true));
     try {
       const res = await API.auth.register(
@@ -37,7 +50,7 @@ const Register = () => {
       dispatch(authForm.setRequesting(false));
       navigate(from, { replace: true });
     } catch (error: any) {
-      dispatch(authForm.setFailure());
+      dispatch(authForm.setFailure(error.response.data.message));
       console.log(error);
     }
   };
