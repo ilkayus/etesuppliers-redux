@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import "./style/modal.css";
 import API from "api";
 import * as formHelper from "./modal.helper";
+import useAPI, { APIResponse } from "hooks/useAPI";
+import { useQuery } from "react-query";
 
 export interface Props {
   onClose: any;
@@ -12,15 +14,15 @@ const Modal = ({ state, onClose }: Props) => {
   const [formContent, setFormContent] = useState<any[]>([]);
   const [companies, setCompanies] = useState<any[]>([]);
 
+  const response: APIResponse = useAPI("modalCompanyList", () =>
+    API.search.getCompanyList()
+  );
+
   useEffect(() => {
-    if (state.dataType === "product") {
-      const companyList = async () => {
-        const res = await API.search.getCompanyList();
-        return res;
-      };
-      companyList().then((data) => setCompanies(data));
+    if (state.dataType === "product" && response.status === "success") {
+      setCompanies(response.data);
     }
-  }, [state.dataType]);
+  }, [response.status, state.dataType, response.data]);
 
   useEffect(() => {
     if (state.actionType === "update")
