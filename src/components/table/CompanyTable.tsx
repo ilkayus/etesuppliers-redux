@@ -81,7 +81,7 @@ const CompanyTable = () => {
         </a>
       </td>
       <td key={ind + 5}>{x.incorporationCountry}</td>
-      <td key={ind + 6}> `${ago(x.createdAt)} ago`</td>
+      <td key={ind + 6}>{ago(x.createdAt) + " ago"}</td>
     </>
   ));
 

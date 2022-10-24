@@ -8,7 +8,6 @@ const getCompanyList = async (): Promise<any[]> => {
   const config = checkUserAndSetHeader();
   const url = urlHelper.BASE_URL + urlHelper.GET_COMPANY_LIST_URL;
   const response = await axios.get(url, config);
-  console.log("asdasdasdasdasdasdasdasdas");
   return response.data.data;
 };
 

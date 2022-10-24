@@ -132,6 +132,7 @@ export const dataSlice = createSlice({
         state.table.received = false;
       })
       .addCase(fetchCompaniesData.fulfilled, (state, action) => {
+        state.table.page = "companies";
         state.table.companies = action.payload;
         state.table.loading = false;
         state.table.received = true;
@@ -145,6 +146,7 @@ export const dataSlice = createSlice({
         state.table.received = false;
       })
       .addCase(fetchProductsData.fulfilled, (state, action) => {
+        state.table.page = "products";
         state.table.products = action.payload;
         state.table.loading = false;
         state.table.received = true;

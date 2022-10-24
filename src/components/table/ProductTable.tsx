@@ -77,7 +77,7 @@ const ProductTable = () => {
       <td key={ind + 4}>{x.amount}</td>
       <td key={ind + 5}>{x.amountUnit}</td>
       <td key={ind + 6}>{x.company.name}</td>
-      <td key={ind + 7}> `${ago(x.createdAt)} ago`</td>
+      <td key={ind + 7}>{ago(x.createdAt) + " ago"}</td>
     </>
   ));
 

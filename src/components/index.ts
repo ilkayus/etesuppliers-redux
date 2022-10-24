@@ -20,6 +20,7 @@ import SearchResult from "./searchBar/SearchResult";
 import SearchBarList from "./searchBar/SearchBarList";
 
 import Modal from "./modal/Modal";
+import DeleteModal from "./modal/DeleteModal";
 
 import Loading from "./loading/Loading";
 
@@ -39,6 +40,7 @@ const Components = {
   CompanyTable,
   ProductTable,
   Modal,
+  DeleteModal,
   SearchBar,
   SearchResult,
   SearchBarList,
